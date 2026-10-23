@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="735"/><column_width id="4" width="0"/></tab_structure><tab_browse><table title="." custom_title="0" dock_id="2" table="0,0:"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000002fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000ffffffff0000011800ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">SELECT &quot;au_id&quot; as AUTHOR_ID,&quot;au_lname&quot; as LAST_NAME,&quot;au_fname&quot; as FIRST_NAME FROM authors;
+
+SELECT &quot;title_id&quot;,&quot;title&quot; AS TITLE, &quot;pub_id&quot; FROM titles;
+SELECT &quot;pub_id&quot;, &quot;pub_name&quot; AS PUBLISHER FROM publishers;
+SELECT * FROM publishers
+
+SELECT * FROM titleauthor;
+
+SELECT * FROM authors;
+SELECT * FROM sales;
+
+SELECT authors.au_id, authors.au_lname, authors.au_fname, sales.qty AS TOTAL
+FROM authors INNER JOIN titleauthor
+    ON authors.au_id = titleauthor.au_id
+  INNER JOIN titles
+    ON titles.title_id = titleauthor.title_id
+	INNER JOIN sales
+	ON sales.title_id =  titles.title_id 
+	GROUP BY authors.au_id
+	ORDER BY TOTAL DESC
+	
+
+
+
+
+
+
+SELECT authors.AUTHOR_ID, authors.LAST_NAME, authors.FIRST_NAME,titles.TITILE, publishers.PUBLISHER
+FROM authors INNER JOIN titleauthor
+    ON authors.author_id = titleauthor.author_id
+  INNER JOIN titles
+    ON titles.title_id = titleauthor.title_id
+	INNER JOIN publishers
+	ON titleauthor.
+	
+
+	
+SELECT authors.au_id, authors.au_lname, authors.au_fname,publishers.pub_name, COUNT(titles.title_id) AS total_titles
+FROM authors INNER JOIN titleauthor
+    ON authors.au_id = titleauthor.au_id
+  INNER JOIN titles
+    ON titles.title_id = titleauthor.title_id
+	INNER JOIN publishers
+	ON titles.pub_id = publishers.pub_id
+	GROUP BY authors.au_id, publishers.pub_id;
+	
+
+
+
+
+
+
+ /*`AUTHOR ID` - the ID of the author
+`LAST NAME` - author last name
+`FIRST NAME` - author first name
+`TITLE` - name of the published title
+`PUBLISHER` - name of the publisher where the title was published*/
+
+ /*SELECT &quot;au_id&quot;,&quot;au_lname&quot;,&quot;au_fname&quot; FROM authors*/
+ /*SELECT &quot;pub_id&quot;, &quot;pub_name&quot; FROM publishers;*/</sql><sql name="SQL 2*">SELECT authors.au_id, authors.au_lname, authors.au_fname, SUM(sales.qty) AS TOTAL
+FROM authors INNER JOIN titleauthor
+    ON authors.au_id = titleauthor.au_id
+  INNER JOIN titles
+    ON titles.title_id = titleauthor.title_id
+	INNER JOIN sales
+	ON sales.title_id =  titles.title_id 
+	GROUP BY authors.au_id
+	ORDER BY TOTAL DESC
+	
+SELECT authors.au_id, authors.au_lname, authors.au_fname, sales.qty 
+FROM authors INNER JOIN titleauthor
+    ON authors.au_id = titleauthor.au_id
+  INNER JOIN titles
+    ON titles.title_id = titleauthor.title_id
+	INNER JOIN sales
+	ON sales.title_id =  titles.title_id 
+
+SELECT * FROM sales
+select * FROM authors
+</sql><current_tab id="1"/></tab_sql></sqlb_project>
